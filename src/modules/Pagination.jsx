@@ -62,19 +62,19 @@ export default function PaginatedItems({ items }) {
 
             {selectedAsteroid && (
       <div 
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-xl p-4 transition-all animate-fade-in"
+        className="fixed [@media(max-width:768px)]:p-4 inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-xl p-4 transition-all animate-fade-in"
         onClick={() => setSelectedAsteroid(null)}
       >
         <div 
-          className="bg-[#0E21A0]/20 backdrop-blur-md border border-[#F375C2]/30 p-8 rounded-3xl max-w-xl w-full shadow-[0_0_50px_rgba(243,117,194,0.2)]"
+          className="bg-[#0E21A0]/20 backdrop-blur-md border border-[#F375C2]/30 p-8 [@media(max-width:768px)]:p-5 [@media(max-width:768px)]:max-h-[90vh] [@media(max-width:768px)]:overflow-y-auto rounded-3xl max-w-xl w-full shadow-[0_0_50px_rgba(243,117,194,0.2)]"
           onClick={(e) => e.stopPropagation()}
         >
           <h2 className="text-white text-3xl font-black mb-2">{selectedAsteroid.name}</h2>
           <span className="text-[#F375C2] font-bold tracking-widest text-sm uppercase">Detailed Data</span>
           
-          <div className="mt-6 space-y-6 text-white">
-            <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white/5 p-4 rounded-xl">
+          <div className="mt-6 [@media(max-width:768px)]:space-y-3 space-y-6 text-white">
+            <div className="grid grid-cols-2 gap-4 [@media(max-width:768px)]:grid-cols-1 [@media(max-width:768px)]:gap-2">
+                <div className="bg-white/5 p-4 [@media(max-width:768px)]:p-3 rounded-xl">
                 <p className="text-neutral-400 text-[10px] uppercase font-bold mb-1">Name</p>
                 <p className="font-mono text-lg">{selectedAsteroid.name}</p>
               </div>

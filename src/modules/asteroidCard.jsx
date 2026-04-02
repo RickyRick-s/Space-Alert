@@ -2,7 +2,7 @@ export const AsteroidCard = ({ name, type, moid, pha, lastObs, size, onSelect })
   return (
     <div
     onClick={onSelect}
-    className="relative group w-72 bg-[#0E21A0]/20 backdrop-blur-md border border-[#B153D7]/30 rounded-2xl p-6 shadow-lg transition-all hover:border-[#F375C2]/50 hover:shadow-[#4D2FB2]/40 hover:scale-105">
+    className="relative group [@media(max-width:768px)]:w-[90vw] [@media(max-width:768px)]:mx-auto [@media(max-width:768px)]:p-4 w-72 bg-[#0E21A0]/20 backdrop-blur-md border border-[#B153D7]/30 rounded-2xl p-6 shadow-lg transition-all hover:border-[#F375C2]/50 hover:shadow-[#4D2FB2]/40 hover:scale-105">
     
       <div className={`absolute -top-3 -right-3 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter shadow-lg 
       ${
