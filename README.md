@@ -3,7 +3,7 @@
 **Space Alert** is an interactive radar system designed to visualize Near-Earth Objects (NEOs) using official data from the **NASA API (NeoWS)**. The application projects asteroid trajectories into a dynamic 3D environment, allowing for the visual identification of potential celestial threats with high-precision telemetry.
 
 ---
-Markdown
+
 # ☄️ Space Alert: Earth Radar & NASA Discovery
 
 **Space Alert** is a comprehensive space exploration dashboard that integrates real-time data from multiple NASA endpoints. It features a high-tech visual interface to track Near-Earth Objects (NEOs) and discover the daily wonders of the cosmos through a dynamic media integration.
