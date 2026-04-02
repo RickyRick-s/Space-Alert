@@ -242,7 +242,7 @@ export default function Radar3D({ asteroids = [] }) {
              <div className="mb-2">
                 <span className="text-[#00ccff] text-[10px] font-bold tracking-[0.5em]">LIVE_FROM_SPACE</span>
              </div>
-             <div className="w-64 h-1 bg-white/5 rounded-full overflow-hidden">
+             <div className="w-64 h-1 bg-white/5 rounded-full overflow-hidden [@media(max-width:768px)]:w-full">
                 <div className="h-full bg-linear-to-r from-[#00ccff] to-[#4d2fb2] w-2/3 animate-pulse"></div>
              </div>
           </div>
