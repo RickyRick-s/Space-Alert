@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+
+
+
+:root {
+  --color-space-dark: #0E21A0;
+  --color-space-medium: #4D2FB2;
+  --color-space-light: #B153D7;
+  --color-space-accent: #F375C2;
+}
+
+.bg-space-dark {
+  background-color: var(--color-space-dark);
+}
+
+.bg-space-medium {
+  background-color: var(--color-space-medium);
+}
+
+.bg-space-light {
+  background-color: var(--color-space-light);
+}
+
+.bg-space-accent {
+  background-color: var(--color-space-accent);
+}
+
+.text-space-dark {
+  color: var(--color-space-dark);
+}
+
+.btn-primary {
+  background-color: var(--color-space-dark);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-space-medium);
+  transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.9s ease-out forwards;
+}
