@@ -86,14 +86,23 @@ if(Loading){
               onLoad={(e) => e.currentTarget.classList.add('opacity-100')}
             />
           ) : (
-            <iframe 
-              className="w-full h-full aspect-video border-none shadow-inner"
-              src={`${Data?.url}&autoplay=1&mute=1`}
-              title="NASA Video"
-              allowFullScreen
+            
+          <video
+            className="h-full w-full object-cover"
+            src={Data?.url}
+            controls
+            autoPlay
+            loop
+            muted
             />
           )}
-          <div className="absolute inset-0 flex flex-col justify-center bg-black/60 p-8 opacity-0 transition-opacity duration-500 group-hover:opacity-100 backdrop-blur-sm">
+
+          <div className={`
+        absolute inset-0 flex flex-col justify-center bg-black/60 p-8 
+        opacity-0 transition-opacity duration-500 group-hover:opacity-100
+        ${Data?.media_type === "video" ? "pointer-events-none" : ""}
+        ${Data?.media_type === "video" ? "" : "backdrop-blur-sm"}
+        `}>
     
     <h3 className=" @media(max-width:768px)]:opacity-100 [@media(max-width:768px)]:p-4 text-[#F375C2] font-black text-xl mb-2 transform translate-y-4 transition-transform duration-500 group-hover:translate-y-0">
       {Data?.title}
@@ -102,7 +111,7 @@ if(Loading){
       {Data?.explanation}
     </p>
     <br />
-    <a href={`${Data.hdurl}`} target="_blank" className="btn-primary hover:text-space-accent transition self-center [@media(max-width:768px)]:pointer-events-none">Full image</a>
+    <a href={`${Data.hdurl}`} target="_blank" className={`${Data?.media_type === "video" ? "opacity-0" : "opacity-100"} btn-primary hover:text-space-accent transition self-center [@media(max-width:768px)]:pointer-events-none`}>Full image</a>
 
   </div>
       </div>
