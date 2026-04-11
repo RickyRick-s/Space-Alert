@@ -3,10 +3,19 @@ import { useEffect, useState } from "react"
 import PaginatedItems from "./Pagination.jsx";
 import { useAsteroids } from "../context/AsteroidContext";
 import icon from "../assets/meteorito.png"
+import fallback from "../assets/background.png"
 
 
 
 export default function Inicio() {
+
+  const PLACEHOLDER_DATA = {
+  title: "A Galaxy Beyond",
+  url: fallback,
+  hdurl: fallback,
+  explanation: "The NASA's services are experimenting issues, please wait until we can reconnect",
+  media_type: "image"
+};
 
   const [Data, setData] = useState(null);
   const [Info, setInfo] = useState([]);
@@ -18,38 +27,51 @@ export default function Inicio() {
 
   const apiKey = import.meta.env.VITE_API_KEY;
 
-
 useEffect(() => {
   const fetchData = async () => {
     setLoading(true);
-    try {
-
-      const [resApod, resNeo] = await Promise.all([
+  
+      const [resApod, resNeo] = await Promise.allSettled([
         axios.get("https://api.nasa.gov/planetary/apod", {
-          params: { api_key: apiKey, thumbs: true }
+          params: { api_key: apiKey, thumbs: true },
+          validateStatus: () => true
         }),
         axios.get("https://api.nasa.gov/neo/rest/v1/feed", {
           params: { api_key: apiKey}
         })
       ]);
 
-      
-      setData(resApod.data);
-      const allAsteroids = Object.values(resNeo.data.near_earth_objects).flat();
-      setInfo(allAsteroids);
-      setAsteroids(allAsteroids);
-      
-      setError(null);
-    } catch (error) {
-      console.error(error);
-      setError("Fetching error");
-    } finally {
-      setLoading(false);
-    }
-  };
+  try{ 
+
+  
+if (resApod.status === "fulfilled" && resApod.value.status === 200){
+  setData(resApod.value.data);
+} else {
+  setData(PLACEHOLDER_DATA);
+  setError("APOD failed");
+}
+
+if (
+  resNeo.status === "fulfilled" &&
+  resNeo.value.data?.near_earth_objects
+) {
+  const allAsteroids = Object.values(
+    resNeo.value.data.near_earth_objects
+  ).flat();
+
+  setInfo(allAsteroids);
+  setAsteroids(allAsteroids);
+} else {
+  console.error("NEO failed");
+  setInfo([]);
+}
+  } finally {
+    setLoading(false);
+  }
+}
 
   fetchData();
-}, []);
+}, [setAsteroids]);
 
 const filteredAsteroids = Info ?  Info.filter((asteroid) => {
   const matchesName = asteroid.name.toLowerCase().includes(NameFilter.toLowerCase());
@@ -67,11 +89,6 @@ if(Loading){
     </div>
     </>
     )
-  }
-  if(Error){
-  return(
-    <p>{Error}</p>
-  )
   } else {
    return (
       <>
@@ -83,7 +100,8 @@ if(Loading){
               className="h-full w-full object-cover" 
               src={Data?.hdurl || Data?.url} 
               alt={Data?.title}
-              onLoad={(e) => e.currentTarget.classList.add('opacity-100')}
+              onLoad={(e) => e.currentTarget.classList.add('opacity-100')
+              }
             />
           ) : (
             
